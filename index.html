@@ -3,63 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nature Harmony - Contact Us</title>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <title>Nature Harmony - Relax and Sleep</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #1b263b;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero img {
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .hero .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #1b9aaa;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em;
+      border-radius: 5px;
+    }
+
+    .hero .btn:hover {
+      background-color: #138a8e;
+    }
+
+    nav {
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: #1b9aaa;
+      text-decoration: none;
+      font-size: 1.2em;
+      margin: 0 10px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1b263b;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Contact Us</h1>
-    <nav>
-      <a href="terms-of-use.html">Terms of Use</a>
-      <a href="privacy-policy.html">Privacy Policy</a>
-    </nav>
+    <h1>Nature Harmony</h1>
   </header>
-  <main>
-    <form id="contactForm">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-      
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" required></textarea>
-      
-      <button type="submit">Submit</button>
-    </form>
-    <p id="formStatus"></p>
-  </main>
-  <script>
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyBqMDlwqv4xaOKGn3jBtRqVW4YW2bL_K68",
-      authDomain: "naturesounds-cb6e6.firebaseapp.com",
-      projectId: "naturesounds-cb6e6",
-      storageBucket: "naturesounds-cb6e6.firebasestorage.app",
-      messagingSenderId: "991843020282",
-      appId: "1:991843020282:web:91db37ef872dce0a660843",
-      measurementId: "G-04WNWZPSKN"
-    };
 
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+  <div class="hero">
+    <img src="assets/app-icon.png" alt="Nature Harmony App">
+    <h2>Relax, Focus, and Sleep</h2>
+    <p>Discover the perfect sounds to help you relax, focus, and fall asleep. Mix and match sounds to create your own harmony.</p>
+    <a href="https://apps.apple.com/us/app/nature-harmony/id6744616021" class="btn">Download on the App Store</a>
+  </div>
 
-    // Form submission handler
-    document.getElementById('contactForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
+  <nav>
+    <a href="contact.html">Contact Us</a>
+    <a href="terms-of-use.html">Terms of Use</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+  </nav>
 
-      try {
-        await db.collection('contacts').add({ name, email, message });
-        document.getElementById('formStatus').textContent = 'Message sent successfully!';
-      } catch (error) {
-        document.getElementById('formStatus').textContent = 'Error sending message.';
-      }
-    });
-  </script>
+  <footer>
+    <p>&copy; 2025 Nature Harmony. All rights reserved.</p>
+  </footer>
 </body>
 </html>
