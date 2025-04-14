@@ -8,14 +8,18 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0d1b2a;
+      background: url('assets/siteBg.png') no-repeat center center fixed;
+      background-size: cover;
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     header {
       text-align: center;
       padding: 20px;
-      background-color: #1b263b;
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
     header h1 {
@@ -23,6 +27,7 @@
     }
 
     main {
+      flex: 1;
       padding: 40px 20px;
       max-width: 600px;
       margin: 0 auto;
@@ -60,21 +65,36 @@
       background-color: #138a8e;
     }
 
-    nav {
+    footer {
+      background-color: rgba(0, 0, 0, 0.5);
       text-align: center;
-      margin-top: 20px;
+      padding: 20px;
+      margin-top: auto;
     }
 
-    nav a {
+    footer nav {
+      margin-bottom: 10px;
+    }
+
+    footer nav a {
       color: #1b9aaa;
       text-decoration: none;
       font-size: 1.2em;
+      margin: 0 10px;
     }
 
-    nav a:hover {
+    footer nav a:hover {
       text-decoration: underline;
     }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+    }
   </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 </head>
 <body>
   <header>
@@ -94,10 +114,58 @@
 
       <button type="submit">Send Message</button>
     </form>
+    <p id="formStatus" style="text-align: center; font-size: 1.2em;"></p>
   </main>
 
-  <nav>
-    <a href="index.html">Back to Home</a>
-  </nav>
+  <footer>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="terms-of-use.html">Terms of Use</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+    <p>&copy; 2025 Texen.dev. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyBqMDlwqv4xaOKGn3jBtRqVW4YW2bL_K68",
+      authDomain: "naturesounds-cb6e6.firebaseapp.com",
+      projectId: "naturesounds-cb6e6",
+      storageBucket: "naturesounds-cb6e6.firebasestorage.app",
+      messagingSenderId: "991843020282",
+      appId: "1:991843020282:web:91db37ef872dce0a660843",
+      measurementId: "G-04WNWZPSKN"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Form submission handler
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const statusText = document.getElementById('formStatus');
+
+      try {
+        // Add data to Firestore
+        await db.collection('contacts').add({ name, email, message, timestamp: new Date() });
+        statusText.textContent = 'Message sent successfully!';
+        statusText.style.color = 'green';
+
+        // Clear form fields
+        document.getElementById('contactForm').reset();
+      } catch (error) {
+        console.error('Error sending message: ', error);
+        statusText.textContent = 'Error sending message. Please try again.';
+        statusText.style.color = 'red';
+      }
+    });
+  </script>
 </body>
 </html>
