@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature Harmony - Contact Us</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Contact Us</h1>
+    <nav>
+      <a href="terms-of-use.html">Terms of Use</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </header>
+  <main>
+    <form id="contactForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+      
+      <button type="submit">Submit</button>
+    </form>
+    <p id="formStatus"></p>
+  </main>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBqMDlwqv4xaOKGn3jBtRqVW4YW2bL_K68",
+      authDomain: "naturesounds-cb6e6.firebaseapp.com",
+      projectId: "naturesounds-cb6e6",
+      storageBucket: "naturesounds-cb6e6.firebasestorage.app",
+      messagingSenderId: "991843020282",
+      appId: "1:991843020282:web:91db37ef872dce0a660843",
+      measurementId: "G-04WNWZPSKN"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Form submission handler
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      try {
+        await db.collection('contacts').add({ name, email, message });
+        document.getElementById('formStatus').textContent = 'Message sent successfully!';
+      } catch (error) {
+        document.getElementById('formStatus').textContent = 'Error sending message.';
+      }
+    });
+  </script>
+</body>
+</html>
