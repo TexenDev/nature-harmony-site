@@ -128,6 +128,8 @@
   </footer>
 
   <script>
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
     // Firebase configuration
     const firebaseConfig = {
     apiKey: "AIzaSyBqMDlwqv4xaOKGn3jBtRqVW4YW2bL_K68",
@@ -135,14 +137,15 @@
       projectId: "naturesounds-cb6e6",
       storageBucket: "naturesounds-cb6e6.firebasestorage.app",
       messagingSenderId: "991843020282",
-      appId: "1:991843020282:web:91db37ef872dce0a660843",
-      measurementId: "G-04WNWZPSKN"
+      appId: "1:991843020282:web:91db37ef872dce0a660843"
     };
 
     // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
+    // const app = firebase.initializeApp(firebaseConfig);
+    // const db = firebase.firestore();
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
     // Form submission handler
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
